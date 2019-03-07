@@ -11,6 +11,23 @@
     - sysbench
 
   tasks:
+    - name: stop firewall service
+      service:
+        name: firewalld
+        state: stopped
+        enabled: no
+      when: (ansible_distribution == "CentOS")
+
+    - name: stop irqbalance service
+      service:
+        name: irqbalance
+        state: stopped
+      when: (irq_bind == "on")
+
+    - name: bind irq of ethernet card
+      script: set_irq_affinity.py "{{ eth_dev }}" "{{ irq_affinity }}"
+      when: (irq_bind == "on")
+
     - name: copy test script to client
       template:
         src: "{{ item }}"

@@ -4,6 +4,8 @@ mariadb_path={{ topdir }}/mariadb
 mariadb_server=192.168.1.160
 sysbench_client=192.168.1.160
 
+mariadb_affinity=16-19
+
 mariadb_port_min=3307
 mariadb_port_max=3307
 
@@ -12,6 +14,10 @@ mariadb_table_count=10
 
 max_time=600
 threads_per_inst=3
+
+irq_bind=on
+eth_dev=enahisic2i2
+irq_affinity=0:4
 
 [server]
 192.168.1.160

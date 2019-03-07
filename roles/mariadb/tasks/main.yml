@@ -6,6 +6,7 @@
     name: "{{ item }}"
     state: present
   with_items:
+    - numactl
     - mariadb
     - mariadb-server
   when: (ansible_distribution == "CentOS")
@@ -57,7 +58,7 @@
   with_sequence: start="{{ mariadb_port_min }}" end="{{ mariadb_port_max }}"
 
 - name: start mariadb server
-  script: start-mariadb.sh "{{ mariadb_path }}/{{ item }}"
+  script: start-mariadb.sh "{{ mariadb_path }}/{{ item }}" "{{ mariadb_affinity }}"
   with_sequence: start="{{ mariadb_port_min }}" end="{{ mariadb_port_max }}"
 
 - name: create sbtest database

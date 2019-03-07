@@ -5,6 +5,12 @@
 	exit 1
 }
 
+cpu_affinity_prefix=""
+[ -n $2 ] && {
+	mariadb_cpu=$2
+	cpu_affinity_prefix="numactl -C ${2} --localalloc"
+}
+
 mariadb_path=$1
 mariadb_conf_path=${mariadb_path}/etc/my.cnf
 
@@ -12,7 +18,7 @@ mariadb_conf_path=${mariadb_path}/etc/my.cnf
 
 	mysql_install_db --basedir=/usr --datadir=${mariadb_path}/data --user=mysql
 
-	mysqld_safe --defaults-file=${mariadb_conf_path} &
+	${cpu_affinity_prefix} mysqld_safe --defaults-file=${mariadb_conf_path} &
 
 	# sleep before exit, so mariadb server will not be killed after exit
 	sleep 10
