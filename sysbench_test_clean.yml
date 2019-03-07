@@ -1,0 +1,10 @@
+
+---
+
+- hosts: client
+  remote_user: root
+
+  tasks:
+    - name: sysbench clean test data
+      script: sysbench-test-clean.sh "{{ mariadb_server }}" "{{ item }}" "{{ mariadb_table_size }}" "{{ mariadb_table_count }}" "{{ max_time }}" "{{ threads_per_inst }}"
+      with_sequence: start="{{ mariadb_port_min }}" end="{{ mariadb_port_max }}"

@@ -1,0 +1,65 @@
+---
+# tasks file for mariadb
+
+- name: install mariadb
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - mariadb
+    - mariadb-server
+  when: (ansible_distribution == "CentOS")
+
+- name: ensure mariadb etc path is present
+  file:
+    state: directory
+    owner: mysql
+    group: mysql
+    path: "{{ mariadb_path }}/{{ item }}/etc"
+  with_sequence: start="{{ mariadb_port_min }}" end="{{ mariadb_port_max }}"
+
+- name: ensure mariadb pid path is present
+  file:
+    state: directory
+    owner: mysql
+    group: mysql
+    path: "{{ mariadb_path }}/{{ item }}/pid"
+  with_sequence: start="{{ mariadb_port_min }}" end="{{ mariadb_port_max }}"
+
+- name: ensure mariadb log path is present
+  file:
+    state: directory
+    owner: mysql
+    group: mysql
+    path: "{{ mariadb_path }}/{{ item }}/log"
+  with_sequence: start="{{ mariadb_port_min }}" end="{{ mariadb_port_max }}"
+
+- name: ensure mariadb socket path is present
+  file:
+    state: directory
+    owner: mysql
+    group: mysql
+    path: "{{ mariadb_path }}/{{ item }}/socket"
+  with_sequence: start="{{ mariadb_port_min }}" end="{{ mariadb_port_max }}"
+
+- name: ensure mariadb data path is present
+  file:
+    state: directory
+    owner: mysql
+    group: mysql
+    path: "{{ mariadb_path }}/{{ item }}/data"
+  with_sequence: start="{{ mariadb_port_min }}" end="{{ mariadb_port_max }}"
+
+- name: ensure mariadb is configured
+  template:
+    src: my.cnf
+    dest: "{{ mariadb_path }}/{{ item }}/etc/my.cnf"
+  with_sequence: start="{{ mariadb_port_min }}" end="{{ mariadb_port_max }}"
+
+- name: start mariadb server
+  script: start-mariadb.sh "{{ mariadb_path }}/{{ item }}"
+  with_sequence: start="{{ mariadb_port_min }}" end="{{ mariadb_port_max }}"
+
+- name: create sbtest database
+  script: create-database.sh "{{ mariadb_path }}/{{ item }}"
+  with_sequence: start="{{ mariadb_port_min }}" end="{{ mariadb_port_max }}"

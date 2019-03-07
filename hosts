@@ -1,0 +1,20 @@
+[all:vars]
+topdir=/home/sysbench
+mariadb_path={{ topdir }}/mariadb
+mariadb_server=192.168.1.160
+sysbench_client=192.168.1.160
+
+mariadb_port_min=3307
+mariadb_port_max=3307
+
+mariadb_table_size=25000
+mariadb_table_count=10
+
+max_time=600
+threads_per_inst=3
+
+[server]
+192.168.1.160
+
+[client]
+192.168.1.160

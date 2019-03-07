@@ -1,0 +1,7 @@
+---
+# defaults file for sysbench
+
+sysbench_source: source_code
+#sysbench_source: binary_package
+sysbench_src_dir: "{{ topdir }}/sysbench"
+sysbench_ver: 0.5

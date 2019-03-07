@@ -1,0 +1,26 @@
+---
+
+- hosts: server
+  remote_user: root
+  roles:
+    - mariadb
+
+- hosts: client
+  remote_user: root
+  roles:
+    - sysbench
+
+  tasks:
+    - name: copy test script to client
+      template:
+        src: "{{ item }}"
+        dest: "{{ topdir }}/{{ item }}"
+      with_items:
+        - sysbench-test-prepare.sh
+        - sysbench-test-run.sh
+        - sysbench-test-clean.sh
+
+    - name: show sysbench-test-run hint
+      debug:
+        msg: "run sysbench-test-prepare.sh sysbench-test-run.sh at {{ sysbench_client }}:/{{ topdir }} dir"
+      

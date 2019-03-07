@@ -1,0 +1,29 @@
+---
+# tasks file for sysbench
+
+- name: install dependency packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - automake
+    - autoconf
+    - libtool
+  when: (sysbench_source == "source_code")
+
+- name: dowload sysbench source
+  git:
+    repo: https://github.com/akopytov/sysbench.git
+    dest: "{{ sysbench_src_dir }}"
+    version: "{{ sysbench_ver }}"
+  when: (sysbench_source == "source_code")
+
+- name: build sysbench from source
+  script: build-sysbench.sh "{{ sysbench_src_dir }}"
+  when: (sysbench_source == "source_code")
+
+- name: install sysbench from package
+  yum:
+    name: sysbench
+    state: present
+  when: (sysbench_source == "binary_package" and ansible_distribution == "CentOS")
