@@ -18,6 +18,14 @@ cd ${percona_path}
 rm -rf ${percona_src_dir}
 tar xf ${percona_src_pkg} && cd ${percona_src_dir}
 
+# Fix build 5.6.xx error with 7.40 gcc
+fix_build_error_5.6.xx_with_7.4.0_gcc() {
+	grep -q fpermissive sql/CMakeLists.txt ||
+	echo "ADD_DEFINITIONS(-fpermissive)" >> sql/CMakeLists.txt
+}
+
+fix_build_error_5.6.xx_with_7.4.0_gcc
+
 	#-DZLIB_LIBRARY:FILEPATH=/usr/local/zlib/lib/ \
 	#-DZLIB_INCLUDE_DIR:PATH=/usr/local/zlib/include/ \
 	#-DWITH_SSL:STRING=bundled \
