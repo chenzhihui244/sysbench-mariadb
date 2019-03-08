@@ -1,0 +1,27 @@
+---
+# tasks file for gcc
+
+- name: install dependency
+  yum:
+    state: present
+    name: "{{ item }}"
+  with_items:
+    - gcc
+    - gcc-c++
+    - gcc-gfortran
+
+- name: ensure gcc dir present
+  file:
+    state: directory
+    path: "{{ gcc_path }}"
+
+- name: download gcc src
+  get_url:
+    url: "{{ gcc_url }}"
+    dest: "{{ gcc_path }}/{{ gcc_src_pkg }}"
+
+- name: build gcc
+  script: build-gcc.sh "{{ gcc_path }}" "{{ gcc_src_pkg }}"
+
+- name: alternative gcc
+  script: alternative-gcc.sh "{{ gcc_path }}" "{{ gcc_src_pkg }}"

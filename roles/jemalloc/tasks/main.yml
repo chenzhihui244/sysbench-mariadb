@@ -1,0 +1,15 @@
+---
+# tasks file for jemalloc
+
+- name: ensure jemalloc path present
+  file:
+    state: directory
+    path: "{{ jemalloc_path }}"
+
+- name: dowload jemalloc
+  get_url:
+    url: "{{ jemalloc_url }}"
+    dest: "{{ percona_path }}/{{ jemalloc_src_pkg }}"
+
+- name: build jemalloc
+  script: build-jemalloc.sh "{{ percona_path }}" "{{ jemalloc_src_pkg }}"

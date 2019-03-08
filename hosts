@@ -19,6 +19,17 @@ irq_bind=on
 eth_dev=enahisic2i2
 irq_affinity=0:4
 
+percona_url=https://www.percona.com/downloads/Percona-Server-5.6/Percona-Server-5.6.22-72.0/source/tarball/percona-server-5.6.22-72.0.tar.gz
+percona_src_pkg=percona-server-5.6.22-72.0.tar.gz
+#percona_url=https://www.percona.com/downloads/Percona-Server-5.7/Percona-Server-5.7.25-28/source/tarball/percona-server-5.7.25-28.tar.gz
+#percona_src_pkg=percona-server-5.7.25-28.tar.gz
+
+percona_path={{ topdir }}/percona
+jemalloc_url=https://github.com/jemalloc/jemalloc/releases/download/4.2.1/jemalloc-4.2.1.tar.bz2
+jemalloc_src_pkg=jemalloc-4.2.1.tar.bz2
+boost_url=http://nchc.dl.sourceforge.net/project/boost/boost/1.59.0/boost_1_59_0.tar.gz
+boost_src_pkg=boost_1_59_0.tar.gz
+
 [server]
 192.168.1.160
 

@@ -1,0 +1,7 @@
+---
+# defaults file for gcc
+
+gcc_path: "{{ topdir }}/gcc"
+gcc_url: https://gcc.gnu.org/pub/gcc/releases/gcc-7.4.0/gcc-7.4.0.tar.xz
+#gcc_url: ftp://gcc.gnu.org/pub/gcc/releases/gcc-7.4.0/gcc-7.4.0.tar.xz
+gcc_src_pkg: gcc-7.4.0.tar.xz

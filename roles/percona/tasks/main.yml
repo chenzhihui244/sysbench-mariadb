@@ -1,0 +1,48 @@
+---
+# tasks file for percona
+
+- name: install dependency
+  yum:
+    state: present
+    name: "{{ item }}"
+  with_items:
+    - gcc
+    - gcc-c++
+    - ncurses
+    - ncurses-devel
+    - wget
+    - bzip2
+    - openssl
+    - openssl-devel
+    - cmake
+    - bison
+    - zlib-devel
+    - libgsasl
+    - libgsasl-devel
+    - libcurl-devel
+    - libaio-devel
+  when: (ansible_distribution == "CentOS")
+
+- name: ensure percona_path present
+  file:
+    state: directory
+    path: "{{ percona_path }}"
+
+- name: dowload percona source package
+  get_url:
+    url: "{{ percona_url }}"
+    dest: "{{ percona_path }}/{{ percona_src_pkg }}"
+
+- name: create boost dir
+  file: 
+    state: directory
+    path: "{{ boost_path }}"
+
+- name: download boost
+  get_url:
+    url: "{{ boost_url }}"
+    dest: "{{ boost_path }}/{{ boost_src_pkg }}"
+
+- name: build percona
+  script: build-percona.sh "{{ percona_path }}" "{{ percona_src_pkg }}"
+

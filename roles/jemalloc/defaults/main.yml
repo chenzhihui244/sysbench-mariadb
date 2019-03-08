@@ -1,0 +1,4 @@
+---
+# defaults file for jemalloc
+
+jemalloc_path: "{{ topdir }}/jemalloc"
