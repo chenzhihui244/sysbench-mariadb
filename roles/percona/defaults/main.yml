@@ -1,4 +1,5 @@
 ---
 # defaults file for percona
 
+percona_path: "{{ topdir }}/percona"
 boost_path: "{{ percona_path }}/boost"
