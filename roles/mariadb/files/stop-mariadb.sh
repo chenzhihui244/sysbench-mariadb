@@ -6,5 +6,8 @@
 }
 
 mariadb_path=$1
+mariadb_sock=${mariadb_path}/socket/mysql.sock
+mariadb_user=${2:-root}
+mariadb_pass=${3:-123456}
 
-/usr/bin/mysqladmin -uroot -S ${mariadb_path}/socket/mysql.sock shutdown
+mysqladmin -u${mariadb_user} -p${mariadb_pass} -S ${mariadb_path}/socket/mysql.sock shutdown

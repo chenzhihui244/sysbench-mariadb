@@ -15,7 +15,8 @@ while [ ${PORT} -le ${MAXPORT} ]; do
 		--mysql-host=${HOST} \
 		--mysql-port=${PORT} \
 		--mysql-db=sbtest \
-		--mysql-user=root \
+		--mysql-user={{ mariadb_user }} \
+		--mysql-password={{ mariadb_pass }} \
 		--oltp-table-size=${TABLE_SIZE} \
 		--oltp-tables-count=${TABLE_COUNT} \
 		--oltop-read-only=on \

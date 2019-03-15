@@ -14,7 +14,7 @@ cpu_affinity_prefix=""
 mariadb_path=$1
 mariadb_conf_path=${mariadb_path}/etc/my.cnf
 
-[ -f ${mariadb_path}/pid/mariadb ] || {
+[ -f ${mariadb_path}/pid/mariadb.pid ] || {
 
 	mysql_install_db --basedir=/usr --datadir=${mariadb_path}/data --user=mysql
 

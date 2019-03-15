@@ -4,5 +4,5 @@
   remote_user: root
   tasks:
     - name: stop mariadb server
-      shell: "mysqladmin -uroot -S {{ mariadb_path }}/{{ item }}/socket/mysql.sock shutdown"
+      shell: "mysqladmin -u{{ mariadb_user }} -p{{ mariadb_pass }} -S {{ mariadb_path }}/{{ item }}/socket/mysql.sock shutdown"
       with_sequence: start="{{ mariadb_port_min }}" end="{{ mariadb_port_max }}"
