@@ -10,7 +10,7 @@ mariadb_sock=${mariadb_path}/socket/mysql.sock
 mariadb_user=${2:-root}
 mariadb_pass=${3:-123456}
 
-mysqladmin -u${mariadb_user} -p${mariadb_pass} -S${mariadb_sock} ping || {
+mysqladmin -u${mariadb_user} -S${mariadb_sock} ping 2>&1 | grep failed && {
 	echo "mariadb server not started"
 	exit 1
 }
