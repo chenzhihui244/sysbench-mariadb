@@ -11,6 +11,7 @@
     - gcc-gfortran
     - wget
     - lbzip2
+    - zlib-devel
 
 - name: ensure gcc dir present
   file:
