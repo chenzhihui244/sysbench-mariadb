@@ -9,6 +9,7 @@
     - gcc
     - gcc-c++
     - gcc-gfortran
+    - wget
 
 - name: ensure gcc dir present
   file:
