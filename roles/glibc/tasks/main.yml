@@ -1,0 +1,21 @@
+---
+# tasks file for glibc
+
+- name: install dependency
+  yum:
+    state: present
+    name: [ 'gcc', 'bison' ]
+  when: ansible_distribution == "CentOS"
+
+- name: ensure glibc dir present
+  file:
+    state: directory
+    path: "{{ glibc_path }}"
+
+- name: download glibc src
+  get_url:
+    url: "{{ glibc_url }}"
+    dest: "{{ glibc_path }}/{{ glibc_src_pkg }}"
+
+- name: build glibc
+  script: build-glibc.sh "{{ glibc_path }}" "{{ glibc_src_pkg }}"

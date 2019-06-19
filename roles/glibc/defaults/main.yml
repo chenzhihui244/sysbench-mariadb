@@ -1,0 +1,7 @@
+---
+# defaults file for glibc
+
+glibc_path: "{{ topdir }}/glibc"
+
+glibc_url: https://mirrors.ustc.edu.cn/gnu/glibc/glibc-2.28.tar.xz
+glibc_src_pkg: glibc-2.28.tar.xz

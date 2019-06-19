@@ -1,0 +1,21 @@
+---
+# tasks file for make
+
+- name: install dependency
+  yum:
+    name: [ 'gcc' ]
+    state: present
+  when: ansible_distribution == "CentOS"
+
+- name: ensure make path present
+  file:
+    state: directory
+    path: "{{ make_path }}"
+
+- name: download make src
+  get_url:
+    url: "{{ make_url }}"
+    dest: "{{ make_path }}/{{ make_src_pkg }}"
+  
+- name: build make
+  script: build-make.sh "{{ make_path }}" "{{ make_src_pkg }}"

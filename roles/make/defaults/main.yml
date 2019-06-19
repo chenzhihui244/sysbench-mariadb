@@ -1,0 +1,7 @@
+---
+# defaults file for make
+
+make_path: "{{ topdir }}/make"
+
+make_url: https://mirrors.tuna.tsinghua.edu.cn/gnu/make/make-4.2.1.tar.bz2
+make_src_pkg: make-4.2.1.tar.bz2
